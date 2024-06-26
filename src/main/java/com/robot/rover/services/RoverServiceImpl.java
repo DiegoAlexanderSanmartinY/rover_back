@@ -19,7 +19,9 @@ public class RoverServiceImpl implements RoverService {
 
     @Override
     public Rover get() {
-    // Iterable<Rover> list = (List<Rover>)roverRepository.findAll();
+        //Iterable<Rover> list = (List<Rover>)roverRepository.findAll();
+        //List<Rover> rList = (List<Rover>)roverRepository.findAll();
+  
         List<Rover> rList = new ArrayList<>((List<Rover>) roverRepository.findAll());
         return rList.get(0);
     };
