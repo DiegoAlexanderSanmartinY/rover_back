@@ -1,0 +1,38 @@
+#rovert {
+  position: absolute;
+  width: 100px;
+  margin-top: 40px;
+  margin-left: 20px;
+  transition: all 500ms linear;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#controls {
+  position: absolute;
+  z-index: 10;
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  opacity: 50%;
+  bottom: 10px;
+  left: calc(50% - 160px);
+}
+
+#controls .button {
+  width: 80px;
+  cursor: pointer;
+}
+
+.rock {
+  position: absolute;
+  width: 100px;
+  margin-top: 30px;
+  margin-left: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
