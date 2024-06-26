@@ -4,7 +4,6 @@ import java.util.List;
 
 
 
-import com.robot.rover.dto.ObstacleDto;
 import com.robot.rover.models.Obstacle;
 
 
