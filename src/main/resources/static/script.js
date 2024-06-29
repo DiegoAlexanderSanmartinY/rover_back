@@ -1,7 +1,24 @@
+const HTTP_SERVER = "http://localhost:8080/api/";
+createMap();
+async function createMap() {
+  await refreshRover();
+
+  let rocks = await fetch(HTTP_SERVER + "obstacle");
+  let rocksPosition = await rocks.json();
+  rocksPosition.forEach((rock) => {
+    createRock(rock.x, rock.y);
+  });
+}
+
+async function refreshRover() {
+  let rover = await fetch(HTTP_SERVER + "rover");
+  let roverPosition = await rover.json();
+  moveRover(roverPosition.x, roverPosition.y);
+}
 function moveRover(x, y) {
+  playmoveSound();
   document.getElementById("rovert").style.top = y * 100 + "px";
   document.getElementById("rovert").style.left = x * 100 + "px";
-  playmoveSound();
 }
 
 function createRock(x, y) {
@@ -15,22 +32,31 @@ function createRock(x, y) {
   rock.style.left = x * 100 + "px";
 }
 
-let posX = 0;
-let posY = 0;
+async function sendCommand(command) {
+  let requestBody = {
+    commands: [`${command}`],
+  };
+  await fetch(HTTP_SERVER + "rover/command", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
+  await refreshRover();
+}
 
-function btnRotateForward() {
-  //alert("down");
-  posY++;
-  moveRover(posX, posY);
+async function btnRotateForward() {
+  await sendCommand("F");
 }
-function btnRotateBackward() {
-  alert("up");
+async function btnRotateBackward() {
+  await sendCommand("B");
 }
-function btnRotateLeft() {
-  alert("left");
+async function btnRotateLeft() {
+  await sendCommand("L");
 }
-function btnRotateRight() {
-  alert("right");
+async function btnRotateRight() {
+  await sendCommand("R");
 }
 
 function playmoveSound() {
